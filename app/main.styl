@@ -1,0 +1,242 @@
+// CSS Reset
+*, *::before, *::after
+    box-sizing: inherit
+
+:root
+    box-sizing: border-box
+    min-height: 100%
+    font-size: 0.5em
+    scrollbar-width: thin
+
+body
+    margin: 0
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+    font-size: 2rem
+    line-height: 1.5
+    color: #fff
+    background: #000
+    overflow: hidden auto
+    opacity: 0
+    transition: 0.5s opacity 0.2s
+
+body.loaded
+    opacity: 1
+
+#animationElement
+    position: fixed
+
+// THINGS ARE MOVING!
+.animated
+    position: absolute
+    animation-duration: 1s
+    animation-play-state: paused
+    animation-delay: calc(-1s * var(--animation-progress))
+    animation-fill-mode: forwards
+    backface-visibility: hidden // Avoid pixelated edges
+    outline: 1px solid transparent // Same
+
+#anim-scrollIndicator
+    width: 100vw
+    text-align: center
+    animation-name: scrollIndicator
+
+#anim-newspaper
+    width: 260vmin
+    height: 260vmin
+    background-image: url('images/newspaper/newspaper.png')
+    background-size: 100% 100%
+    animation-name: newspaper
+    transform-origin: 0 0
+
+#anim-leaders
+    background-image: url('images/leaders/louphaine.png')
+    background-repeat: no-repeat
+    animation-name: leaders
+    transform-origin: 0 0
+
+#anim-leadersBackground
+    background-image: url('images/leaders/capitole.jpg'), url('images/leaders/blurred.jpg')
+    background-repeat: no-repeat, no-repeat
+    animation-name: leadersBackground
+    transform-origin: 0 0
+
+#anim-logoBackground
+    width: 100vw
+    height: 100vh
+    background-color: #002f35
+    animation-name: logoBackground
+
+#anim-logo
+    width: 100vw
+    height: 100vh
+    background-image: url('images/logo/hd-transparent.png')
+    background-repeat: no-repeat
+    background-size: 60vmin
+    background-position: 50% 50%
+    animation-name: logo
+
+#anim-logo-flare
+    width: 100vw
+    height: 100vh
+    background-image: url('images/logo/flare.png')
+    background-repeat: no-repeat
+    background-size: auto 60vmin
+    background-position: 50% 50%
+    animation-name: logo-flare
+
+#anim-login
+    width: 100vw
+    text-align: center
+    animation-name: login
+
+    a
+        display: inline-block
+        padding: 2rem
+        color: #fff
+        border: 2px solid @color
+        text-decoration: none
+        font-size: 3rem
+        transition: background-color 0.2s, color 0.2s
+
+        &:hover, &:active, &:focus
+            color: #002f35
+            background-color: #fff
+
+$size = 80vmin
+$top = calc(50vh - 40vmin)
+$top-translated = calc(90vh + 10vw - 40vmin)
+$left = calc(50vw - 40vmin)
+$bottom = calc(50vh + 40vmin)
+$right = calc(50vw + 40vmin)
+$newspaper-left = calc(50vw - 40vmin - 20vmin)
+$newspaper-top = calc(50vh - 40vmin - 30vmin)
+$newspaper-top-translated = calc(90vh + 10vw - 40vmin - 30vmin)
+
+@keyframes scrollIndicator
+    0%
+        opacity: 1
+
+    5%, 100%
+        opacity: 0
+
+@keyframes newspaper
+    0%
+        // The path clipping bellow requires to rotate first
+        transform: rotate(-10deg) translateX($newspaper-left) translateY($newspaper-top-translated)
+
+    10%
+        transform: rotate(-5deg) translateX($newspaper-left) translateY($newspaper-top)
+        opacity: 1
+
+    20%, 100%
+        transform: rotate(0) translateX($newspaper-left) translateY($newspaper-top)
+        opacity: 0
+
+keyframes-leaders()
+    0%
+        width: 80vmin
+        height: 80vmin
+        transform: rotate(-10deg) translateX($left) translateY($top-translated)
+        background-size: auto 100vmin
+        background-position: 50% 50%
+        filter: grayscale(100%) sepia(25%)
+
+    10%
+        transform: rotate(-5deg) translateX($left) translateY($top)
+
+    20%
+        transform: rotate(0) translateX($left) translateY($top)
+
+    25%
+        width: 80vmin
+        height: 80vmin
+        transform: rotate(0) translateX($left) translateY($top)
+        background-size: auto 100vmin
+        background-position: 50% 50%
+        filter: grayscale(100%) sepia(25%)
+
+    35%
+        background-position: 50% 90%
+
+    50%, 100%
+        width: 100vw
+        height: 100vh
+        background-size: auto 250vh
+        transform: rotate(0) translateX(0) translateY(0)
+        filter: none
+
+    60%, 100%
+        background-position: 50% 90%
+
+@keyframes leaders
+    keyframes-leaders()
+
+    60%
+        opacity: 1
+
+    70%, 100%
+        opacity: 0
+
+@keyframes leadersBackground
+    keyframes-leaders()
+
+    0%, 25%
+        background-size: auto 100vmin, 100vmin
+        background-position: 50% 50%, 50% 50%
+
+    40%, 60%, 100%
+        background-position: 50% 90%, 50% 90%
+
+    50%
+        opacity: 1
+
+    50%, 100%
+        background-size: auto 250vh, 100vmax
+
+    60%, 100%
+        opacity: 0
+
+@keyframes logoBackground
+    0%, 60%
+        opacity: 0
+
+    80%, 100%
+        opacity: 1
+
+@keyframes logo
+    0%, 60%
+        transform: translateY(0)
+
+    0%, 70%
+        opacity: 0
+
+    80%, 100%
+        opacity: 1
+
+    100%
+        transform: translateY(-10vh)
+
+@keyframes logo-flare
+    0%, 60%
+        transform: translateX(-5vmin) translateY(-25vmin) scale(0.5)
+
+    0%, 75%
+        opacity: 0
+
+    85%
+        opacity: 0.6
+
+    100%
+        transform: translateX(7vmin) translateY(calc(-10vh - 10vmin)) scale(0.5)
+        opacity: 0
+
+@keyframes login
+    0%, 80%
+        opacity: 0
+        transform: translateY(calc(50vh + 35vmin))
+
+    90%, 100%
+        opacity: 1
+
+    100%
+        transform: translateY(calc(40vh + 35vmin))
