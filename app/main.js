@@ -1,3 +1,7 @@
+import newspaper from "url:~/app/images/newspaper/newspaper.png"
+import capitole from "url:~/app/images/leaders/capitole.jpg"
+import louphaine from "url:~/app/images/leaders/louphaine.png"
+
 document.addEventListener('DOMContentLoaded', function (e) {
 
   'use strict'
@@ -32,8 +36,8 @@ document.addEventListener('DOMContentLoaded', function (e) {
     }
   }
 
-  load('images/newspaper/newspaper.png')
-  load('images/leaders/capitole.jpg')
-  load('images/leaders/louphaine.png')
+  load(newspaper)
+  load(capitole)
+  load(louphaine)
 
 })
