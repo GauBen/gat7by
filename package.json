@@ -1,18 +1,22 @@
 {
   "name": "gat7by",
-  "description": "Gat7by les Magnifiques",
-  "author": "GauBen",
-  "version": "0.0.1",
-  "repository": "https://github.com/GauBen/gat7by",
-  "license": "MIT",
-  "scripts": {
-    "build": "parcel build 'app/index.html' --public-url '/gat7by/'"
-  },
   "devDependencies": {
+    "@babel/core": "^7.13.16",
     "@parcel/packager-raw-url": "2.0.0-beta.2",
     "@parcel/transformer-image": "2.0.0-beta.2",
     "@parcel/transformer-stylus": "2.0.0-beta.2",
     "@parcel/transformer-webmanifest": "2.0.0-beta.2",
-    "parcel": "^2.0.0-beta.2"
+    "parcel": "next",
+    "postcss": "^8.2.12",
+    "rimraf": "^3.0.2"
+  },
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "yarn clean && parcel build 'app/index.html' --public-url '/gat7by/'",
+    "start": "yarn clean && parcel 'app/index.html' --public-url '/gat7by/'"
+  },
+  "volta": {
+    "node": "16.0.0",
+    "yarn": "1.22.10"
   }
 }
